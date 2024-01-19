@@ -20,12 +20,13 @@ class HomeScreen extends StatelessWidget {
                 title: const Text('Assignment '),
 
               ),
-              body: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Row(
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Column(
@@ -117,20 +118,20 @@ class HomeScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 300,
-                      child:cubit.inputTextList.isEmpty? const Center(
-                        child: Text(
-                          'there\'s no text yet'
+                      SizedBox(
+                        height: 300,
+                        child:cubit.inputTextList.isEmpty? const Center(
+                          child: Text(
+                            'there\'s no text yet'
+                          ),
+                        ): ListView.builder(itemBuilder:(context, index) {
+                          return cubit.buildListView(index);
+                        },
+                        itemCount: cubit.inputTextList.length,
                         ),
-                      ): ListView.builder(itemBuilder:(context, index) {
-                        return cubit.buildListView(index);
-                      },
-                      itemCount: cubit.inputTextList.length,
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
